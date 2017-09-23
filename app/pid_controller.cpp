@@ -82,5 +82,16 @@ auto PIDController::setCurrentPoint(float curr_point) -> void {
 auto PIDController::controller(float desired_point) -> float {
   // TODO(jeshoward): Use PID control method to reach desired point
   // Check: Use loop while squared error is greater than 0.0001; break when
-  // achieved. Return error for test cases.
+  // achieved. Return error for test cases. Clip the control signal to +10 and 
+  // -10. Please make sure that control signal is clipped otherwise the test
+  // cases will fail.
+
+  // Calculate error
+  // LOOP: Check if squared error is greater than 0.0001
+  // Calculate the control signal
+  // Check if the control signal is greater than 10: If yes, control signal=10
+  // Check if the control signal is smaller than -10: If yes, control signal=-10
+  // Update current_point_ as current_point_+=control signal
+  // Calculate the error again 
+  // ENDLOOP
 }
