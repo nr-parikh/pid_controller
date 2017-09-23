@@ -22,6 +22,7 @@ PIDController::PIDController() {
   time_interval_ = 1;
   current_point_ = 1;
   cum_error_ = 0;
+  prev_error_ = 0;
 }
 
 PIDController::PIDController(float k_prop, float k_integral, float k_derivative,
@@ -32,6 +33,7 @@ PIDController::PIDController(float k_prop, float k_integral, float k_derivative,
   time_interval_ = time_interval;
   current_point_ = curr_point;
   cum_error_ = 0;
+  prev_error_ = 0;
 }
 
 PIDController::~PIDController() {
@@ -77,7 +79,8 @@ auto PIDController::setCurrentPoint(float curr_point) -> void {
   current_point_ = curr_point;
 }
 
-auto PIDController::controller(float desired_point, float current_point)
--> void {
+auto PIDController::controller(float desired_point) -> float {
   // TODO(jeshoward): Use PID control method to reach desired point
+  // Check: Use loop while squared error is greater than 0.0001; break when
+  // achieved. Return error for test cases.
 }
