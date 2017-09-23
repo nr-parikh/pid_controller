@@ -22,7 +22,8 @@ class PIDController {
   float k_derivative_;   ///< Derivative constant
   float time_interval_;  ///< Time step
   float cum_error_;      ///< Cumulative error
-  float current_point_;  ///<Current point
+  float prev_error_;     ///< Previous error
+  float current_point_;  ///< Current point
 
  public:
   /**
@@ -105,5 +106,5 @@ class PIDController {
    * @param current_point: Current point
    * @return Return nothing
    */
-  auto controller(float desired_point, float current_point) -> void;
+  auto controller(float desired_point) -> float;
 };

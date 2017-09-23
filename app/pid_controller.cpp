@@ -22,6 +22,7 @@ PIDController::PIDController() {
   time_interval_ = 1;
   current_point_ = 1;
   cum_error_ = 0;
+  prev_error_ = 0;
 }
 
 PIDController::PIDController(float k_prop, float k_integral, float k_derivative,
@@ -32,6 +33,7 @@ PIDController::PIDController(float k_prop, float k_integral, float k_derivative,
   time_interval_ = time_interval;
   current_point_ = curr_point;
   cum_error_ = 0;
+  prev_error_ = 0;
 }
 
 PIDController::~PIDController() {
@@ -77,7 +79,27 @@ auto PIDController::setCurrentPoint(float curr_point) -> void {
   current_point_ = curr_point;
 }
 
-auto PIDController::controller(float desired_point, float current_point)
--> void {
+auto PIDController::controller(float desired_point) -> float {
   // TODO(jeshoward): Use PID control method to reach desired point
+  float error = desired_point - current_point_;
+  float controlSignal = 0;
+  int counter = 0;
+  while (error * error > 0.00001) {
+    cum_error_ += error;
+    controlSignal = (k_prop_ * error)
+        + (k_integral_ * cum_error_ * time_interval_)
+        + (k_derivative_ * (error - prev_error_) / time_interval_);
+    prev_error_ = error;
+    controlSignal = controlSignal < 10 ? controlSignal : 10;
+    controlSignal = controlSignal > -10 ? controlSignal : -10;
+    current_point_ += controlSignal;
+    error = desired_point - current_point_;
+    //    std::cout << "The error is:" << error << ". Counter is:" << counter
+    //              << std::endl;
+    counter++;
+    if (counter > 10000) {
+      break;
+    }
+  }
+  return error;
 }
