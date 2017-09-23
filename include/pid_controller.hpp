@@ -13,6 +13,9 @@
  *
  */
 
+#ifndef INCLUDE_PID_CONTROLLER_HPP
+#define INCLUDE_PID_CONTROLLER_HPP
+
 #include <iostream>
 
 class PIDController {
@@ -108,3 +111,4 @@ class PIDController {
    */
   auto controller(float desired_point) -> float;
 };
+#endif

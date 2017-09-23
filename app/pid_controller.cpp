@@ -81,25 +81,6 @@ auto PIDController::setCurrentPoint(float curr_point) -> void {
 
 auto PIDController::controller(float desired_point) -> float {
   // TODO(jeshoward): Use PID control method to reach desired point
-  float error = desired_point - current_point_;
-  float controlSignal = 0;
-  int counter = 0;
-  while (error * error > 0.00001) {
-    cum_error_ += error;
-    controlSignal = (k_prop_ * error)
-        + (k_integral_ * cum_error_ * time_interval_)
-        + (k_derivative_ * (error - prev_error_) / time_interval_);
-    prev_error_ = error;
-    controlSignal = controlSignal < 10 ? controlSignal : 10;
-    controlSignal = controlSignal > -10 ? controlSignal : -10;
-    current_point_ += controlSignal;
-    error = desired_point - current_point_;
-    //    std::cout << "The error is:" << error << ". Counter is:" << counter
-    //              << std::endl;
-    counter++;
-    if (counter > 10000) {
-      break;
-    }
-  }
-  return error;
+  // Check: Use loop while squared error is greater than 0.0001; break when
+  // achieved. Return error for test cases.
 }
