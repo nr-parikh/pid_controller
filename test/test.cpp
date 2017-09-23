@@ -11,13 +11,26 @@
 #include "pid_controller.hpp"
 
 /**
- * @brief Test if the initialization functions work
+ * @brief First initialization test to check return functions
  */
-TEST(controllerTest, InitializationTest) {
+TEST(controllerTest, InitializationTest1) {
   PIDController control;
   EXPECT_EQ(control.getKProp(), 0);
   EXPECT_EQ(control.getKIntegral(), 0);
   EXPECT_EQ(control.getKDerivative(), 0);
+}
+
+/**
+ * @brief Second initialization function to check value set functions
+ */
+TEST(controllerTest, InitializationTest2) {
+  PIDController control;
+  control.setKProp(10);
+  control.setKIntegral(10);
+  control.setKDerivative(10);
+  EXPECT_EQ(control.getKProp(), 10);
+  EXPECT_EQ(control.getKIntegral(), 10);
+  EXPECT_EQ(control.getKDerivative(), 10);
 }
 
 /**
