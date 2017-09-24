@@ -1,6 +1,6 @@
 /**
  * @file    pid_controller.hpp
- * @author  nrparikh
+ * @author  Jessica Howard
  * @copyright GNU public license
  *
  * @brief Header file for the class PIDController
@@ -18,6 +18,12 @@
 
 #include <iostream>
 
+/**
+ * The PIDController class has variables for each of the term as well  as time
+ * interval. It also has methods for setting and retrieving the values of each
+ * of the constants. It also has the method to implement PID controller to
+ * achieve the desired goal.
+ */
 class PIDController {
  private:
   float k_prop_;         ///< Proportional constant
