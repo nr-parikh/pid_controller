@@ -180,7 +180,7 @@ auto PIDController::controller(float desired_point) -> float {
 
 
   //Begin the loop, run it so long as the squared error exceeds 0.0001
-  while ((localError * localError) > 0.0001) {
+  while ((localError * localError) > 0.00001) {
 
 
     //add error to cumulative error
