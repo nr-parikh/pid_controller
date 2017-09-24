@@ -23,11 +23,14 @@
  * achieve the desired goal.
  */
 PIDController::PIDController() {
+  //Set the class variables to default values
   k_prop_ = 0;
   k_integral_ = 0;
   k_derivative_ = 0;
   time_interval_ = 1;
   current_point_ = 1;
+
+  //Set the error tracking variables to zero
   cum_error_ = 0;
   prev_error_ = 0;
 }
@@ -42,18 +45,14 @@ PIDController::PIDController() {
  */
 PIDController::PIDController(float k_prop, float k_integral, float k_derivative,
                              float time_interval, float curr_point) {
-  /**
-   * set the class variables to the parameter values
-   */
+  //set the class variables to the parameter values
   k_prop_ = k_prop;
   k_integral_ = k_integral;
   k_derivative_ = k_derivative;
   time_interval_ = time_interval;
   current_point_ = curr_point;
 
-  /**
-   * set the error tracking variables to zero
-   */
+  //set the error tracking variables to zero
   cum_error_ = 0;
   prev_error_ = 0;
 }
@@ -172,8 +171,13 @@ auto PIDController::controller(float desired_point) -> float {
   // Calculate the error again 
   // ENDLOOP
 
+  //Reset error tracking variables
+  cum_error_ = 0;
+  prev_error_ = 0;
+
   //Calculate the error between desired and current points
   float localError = desired_point - current_point_;
+
 
   //Begin the loop, run it so long as the squared error exceeds 0.0001
   while ((localError * localError) > 0.0001) {
